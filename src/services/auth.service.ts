@@ -19,6 +19,7 @@ const login = (email: string, password: string) => {
 };
 const logout = () => {
   localStorage.removeItem("token");
+  localStorage.removeItem("user");
 };
 export { register, login, logout };
 const authService = { register, login, logout };

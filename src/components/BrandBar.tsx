@@ -6,7 +6,11 @@ import { NavLink } from 'react-router-dom';
 import AuthContext from '../context/AuthContext';
 import css from "./NavBar.module.scss"
 import {SiApacherocketmq} from "react-icons/si"
-
+import authService from "../services/auth.service";
+function clearLocalStorage() {
+    localStorage.clear();
+    return <NavLink to="/" />;
+}
 function BrandBar() {
       const {isLoggedIn}=useContext(AuthContext)
 
@@ -28,7 +32,7 @@ function BrandBar() {
             <NavLink className={css.title} to="/">?</NavLink>
             <NavLink className={css.title} to="/">#Alert</NavLink>
             <NavLink className={css.title} to="/Addproperty">List your property</NavLink>
-            <NavLink className={css.title} to="/">erez</NavLink>
+            <button onClick={clearLocalStorage} className='btn btn-danger'>logout</button>
           </Nav>
         </Navbar.Collapse>
       </Container>
