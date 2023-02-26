@@ -9,6 +9,8 @@ import {SiApacherocketmq} from "react-icons/si"
 import authService from "../services/auth.service";
 function clearLocalStorage() {
     localStorage.clear();
+    document.location.reload();
+
     return <NavLink to="/" />;
 }
 function BrandBar() {
@@ -32,7 +34,7 @@ function BrandBar() {
             <NavLink className={css.title} to="/">?</NavLink>
             <NavLink className={css.title} to="/">#Alert</NavLink>
             <NavLink className={css.title} to="/Addproperty">List your property</NavLink>
-            <button onClick={clearLocalStorage} className='btn btn-danger'>logout</button>
+             {isLoggedIn&&<button onClick={clearLocalStorage} className='btn btn-danger'>logout</button>}
           </Nav>
         </Navbar.Collapse>
       </Container>
