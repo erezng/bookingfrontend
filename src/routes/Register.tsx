@@ -128,7 +128,7 @@ const Register = () => {
               className="alert alert-danger"
             />
           </div>
-                  <div>
+          <div>
             <label htmlFor="confirm" className="form-label">
               confirm
             </label>

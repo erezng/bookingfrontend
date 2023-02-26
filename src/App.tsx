@@ -10,6 +10,7 @@ import Register from './routes/Register';
 import AuthContext from './context/AuthContext';
 import TopNavbar from './components/Navbar';
 import BrandBar from './components/BrandBar';
+import Addproperty from './routes/AddProperty';
 
 function App() {
   const {isLoggedIn} =useContext(AuthContext)
@@ -20,6 +21,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home/>}/>
           {isLoggedIn&&<Route path="/about" element={<About/>}/>}
+          {isLoggedIn&&<Route path="/addproperty" element={<Addproperty/>}/>}
           {!isLoggedIn &&<Route path="/login" element={<Login/>}/>}
           {!isLoggedIn &&<Route path="/register" element={<Register/>}/>}
         </Routes>

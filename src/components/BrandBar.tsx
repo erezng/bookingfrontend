@@ -27,7 +27,7 @@ function BrandBar() {
             <NavLink className={css.title} to="/">USA</NavLink>
             <NavLink className={css.title} to="/">?</NavLink>
             <NavLink className={css.title} to="/">#Alert</NavLink>
-            <NavLink className={css.title} to="/">List your property</NavLink>
+            <NavLink className={css.title} to="/Addproperty">List your property</NavLink>
             <NavLink className={css.title} to="/">erez</NavLink>
           </Nav>
         </Navbar.Collapse>
