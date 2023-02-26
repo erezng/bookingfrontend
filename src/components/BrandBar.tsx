@@ -33,8 +33,8 @@ function BrandBar() {
             <NavLink className={css.title} to="/">USA</NavLink>
             <NavLink className={css.title} to="/">?</NavLink>
             <NavLink className={css.title} to="/">#Alert</NavLink>
-            <NavLink className={css.title} to="/Addproperty">List your property</NavLink>
-             {isLoggedIn&&<button onClick={clearLocalStorage} className='btn btn-danger'>logout</button>}
+            {isLoggedIn&&<NavLink className={css.title} to="/Addproperty">List your property</NavLink>}
+            {isLoggedIn&&<button onClick={clearLocalStorage} className='btn btn-danger'>logout</button>}
           </Nav>
         </Navbar.Collapse>
       </Container>
