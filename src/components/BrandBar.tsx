@@ -5,8 +5,11 @@ import Navbar from 'react-bootstrap/Navbar';
 import { NavLink } from 'react-router-dom';
 import AuthContext from '../context/AuthContext';
 import css from "./NavBar.module.scss"
-import {SiApacherocketmq} from "react-icons/si"
-import authService from "../services/auth.service";
+import {FaHotel,FaFlagUsa} from "react-icons/fa"
+import {BiHelpCircle} from "react-icons/bi"
+import {BsCoin} from "react-icons/bs"
+import {HiOutlineBellAlert} from "react-icons/hi2"
+
 function clearLocalStorage() {
     localStorage.clear();
     document.location.reload();
@@ -20,7 +23,7 @@ function BrandBar() {
     
       <Navbar bg="primary" variant="dark">
       <Container>
-          <Navbar.Brand href="/"><SiApacherocketmq/>Booking.git</Navbar.Brand>
+          <Navbar.Brand href="/"><FaHotel/> Booking.git</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
@@ -29,11 +32,11 @@ function BrandBar() {
           </Nav>
              <Nav>
             {isLoggedIn&& <NavLink className={css.title} to="/about">About</NavLink>}
-            <NavLink className={css.title} to="/">USD</NavLink>
-            <NavLink className={css.title} to="/">USA</NavLink>
-            <NavLink className={css.title} to="/">?</NavLink>
-            <NavLink className={css.title} to="/">#Alert</NavLink>
-            {isLoggedIn&&<NavLink className={css.title} to="/Addproperty">List your property</NavLink>}
+            <NavLink className={css.title} to="/"><FaFlagUsa/></NavLink>
+            <NavLink className={css.title} to="/"><BsCoin/></NavLink>
+            <NavLink className={css.title} to="/"><BiHelpCircle/></NavLink>
+            <NavLink className={css.title} to="/"><HiOutlineBellAlert/></NavLink>
+            <NavLink className={css.title} to="/addproperty">List your property</NavLink>
             {isLoggedIn&&<button onClick={clearLocalStorage} className='btn btn-danger'>logout</button>}
           </Nav>
         </Navbar.Collapse>

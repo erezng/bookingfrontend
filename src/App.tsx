@@ -21,7 +21,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home/>}/>
           {isLoggedIn&&<Route path="/about" element={<About/>}/>}
-          {isLoggedIn&&<Route path="/addproperty" element={<Addproperty/>}/>}
+          <Route path="/addproperty" element={<Addproperty/>}/>
           {!isLoggedIn &&<Route path="/login" element={<Login/>}/>}
           {!isLoggedIn &&<Route path="/register" element={<Register/>}/>}
         </Routes>

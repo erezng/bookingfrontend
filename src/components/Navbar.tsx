@@ -5,7 +5,9 @@ import Navbar from 'react-bootstrap/Navbar';
 import { NavLink } from 'react-router-dom';
 import AuthContext from '../context/AuthContext';
 import css from "./NavBar.module.scss"
-import {SiApacherocketmq} from "react-icons/si"
+import {MdLocalHotel,MdFlight,MdAttractions} from "react-icons/md"
+import {RiSuitcaseLine} from "react-icons/ri"
+import {FaCar,FaTaxi} from "react-icons/fa"
 
 function TopNavbar() {
       const {isLoggedIn}=useContext(AuthContext)
@@ -18,13 +20,12 @@ function TopNavbar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            {isLoggedIn&& <NavLink className={css.title} to="/about">About</NavLink>}
-            <NavLink className={css.title} to="/">Stay</NavLink>
-            <NavLink className={css.title} to="/">Flight</NavLink>
-            <NavLink className={css.title} to="/">Stay+Flight</NavLink>
-            <NavLink className={css.title} to="/">Car rentals</NavLink>
-            <NavLink className={css.title} to="/">Attractions</NavLink>
-            <NavLink className={css.title} to="/">Airport taxi</NavLink>
+            <NavLink className={css.title} to="/"><MdLocalHotel/> Stay</NavLink>
+            <NavLink className={css.title} to="/"><MdFlight/> Flight</NavLink>
+            <NavLink className={css.title} to="/"><RiSuitcaseLine/> Stay+Flight</NavLink>
+            <NavLink className={css.title} to="/"><FaCar/> Car rentals</NavLink>
+            <NavLink className={css.title} to="/"><MdAttractions/> Attractions</NavLink>
+            <NavLink className={css.title} to="/"><FaTaxi/> Airport taxi</NavLink>
 
           </Nav>
         </Navbar.Collapse>

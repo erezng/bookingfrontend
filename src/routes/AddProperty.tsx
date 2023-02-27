@@ -4,33 +4,36 @@ import addservice from "../services/Add.service";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
+import Swal from "sweetalert2";
 
 const Addproperty = () => {
-    const nav = useNavigate();
-    const [errMessage, setErrMessage] = useState<string | undefined>(undefined);
-
-    const initialValues={
-        name:"",
-        rooms:1,
-        location:"",
-        ac:false,
-        toilets:1,
-        showers:1,
-        img:""
-    }
-    const validationschema=Yup.object({
-        user: Yup.string().min(3, "Name is too short").required(),
-        rooms: Yup.number(),
-        loaction: Yup.string().min(3, "Name is too short").required(),
-        ac: Yup.boolean(),
-        toilets: Yup.number(),
-        showers: Yup.number(),
-        img: Yup.string().min(3, "Name is too short").required(),
+  const nav = useNavigate();
+  const [errMessage, setErrMessage] = useState<string | undefined>(undefined);
+  const [name, setName] = useState("");
+  const [rooms, setRooms] = useState(1);
+  const [location, setLocation] = useState("");
+  const [toilets, setToilets] = useState(1);
+  const [img, setImg] = useState("");
+  const [showers, setShowers] = useState(1);
+  // const {name,rooms,location,toilets,showers,img}=formvalues;
+    const addHotelToDb = () => {
+    const newHotel = {
+      name,rooms,location,toilets,showers,img
+    };
+    fetch("http://localhost:3001/api/hotels/addproperty", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newHotel),
+      
     })
+      .then((res) => res.json())
+      .catch((e) => console.log(e));
+  };
 
     const handleAdd=(formvalues:ListHotel)=>{
-        const {name,rooms,location,ac,toilets,showers,img}=formvalues;
-        addservice(name,rooms,location,ac,toilets,showers,img)
+      
+        const {name,rooms,location,toilets,showers,img}=formvalues;
+        addservice(name,rooms,location,toilets,showers,img)
         .then((res) => {
         console.log(res.data);
         alert("hotel saved!"); //swal //modal
@@ -50,136 +53,98 @@ const Addproperty = () => {
   return (
     <div>
       {errMessage && <div>${errMessage}</div>}
-      <Formik
-        initialValues={initialValues}
-        onSubmit={handleAdd}
-        validationSchema={validationschema}
-      >
-        <Form className="w-50 mx-auto">
-          <div>
-            <label htmlFor="name" className="form-label">
-              Name
-            </label>
-            <Field
-              name="name"
-              type="text"
-              className="form-control"
-              id="name"
-            />
-            <ErrorMessage
-              name="name"
-              component="div"
-              className="alert alert-danger"
-            />
-            
+          <div className="d-flex flex-column  p-4 rounded container">
+          <label htmlFor="name" className="font-bolder">
+            Hotel name:
+          </label>
+          <input
+            className="form-control"
+            type="text"
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
+          
+          />
         </div>
-        <div>
-            <label htmlFor="rooms" className="form-label">
-              rooms
-            </label>
-            <Field
-              name="rooms"
-              type="number"
-              className="form-control"
-              id="rooms"
-            />
-            <ErrorMessage
-              name="rooms"
-              component="div"
-              className="alert alert-danger"
-            />
+        <div className="d-flex flex-column  p-4 rounded container">
+          <label htmlFor="rooms" className="font-bolder">
+            Rooms:
+          </label>
+          <input
+            className="form-control"
+            type="number"
+            value={rooms}
+            onChange={(e) => {
+              setRooms(+e.target.value);
+            }}
+          />
         </div>
-        <div>
-            <label htmlFor="location" className="form-label">
-              location
-            </label>
-            <Field
-              name="location"
-              type="text"
-              className="form-control"
-              id="location"
-            />
-            <ErrorMessage
-              name="location"
-              component="div"
-              className="alert alert-danger"
-            />
-        </div> 
-        <div>
-            <label htmlFor="ac" className="form-label">
-              ac
-            </label>
-            <Field
-              name="ac"
-              type="boolean"
-              className="form-control"
-              id="ac"
-            />
-            <ErrorMessage
-              name="ac"
-              component="div"
-              className="alert alert-danger"
-            />
-        </div>      
-        <div>
-            <label htmlFor="toilets" className="form-label">
-              toilets
-            </label>
-            <Field
-              name="toilets"
-              type="number"
-              className="form-control"
-              id="toilets"
-            />
-            <ErrorMessage
-              name="toilets"
-              component="div"
-              className="alert alert-danger"
-            />
+                <div className="d-flex flex-column  p-4 rounded container">
+          <label htmlFor="location" className="font-bolder">
+            location:
+          </label>
+          <input
+            className="form-control"
+            type="text"
+            value={location}
+            onChange={(e) => {
+              setLocation(e.target.value);
+            }}
+          />
         </div>
-        <div>
-            <label htmlFor="showers" className="form-label">
-              showers
-            </label>
-            <Field
-              name="showers"
-              type="number"
-              className="form-control"
-              id="showers"
-            />
-            <ErrorMessage
-              name="showers"
-              component="div"
-              className="alert alert-danger"
-            />
+        <div className="d-flex flex-column  p-4 rounded container">
+          <label htmlFor="toilets" className="font-bolder">
+            toilets:
+          </label>
+          <input
+            className="form-control"
+            type="number"
+            value={toilets}
+            onChange={(e) => {
+              setToilets(+e.target.value);
+            }}
+          />
         </div>
-        <div>
-            <label htmlFor="img" className="form-label">
-              img
-            </label>
-            <Field
-              name="img"
-              type="text"
-              className="form-control"
-              id="img"
-            />
-            <ErrorMessage
-              name="img"
-              component="div"
-              className="alert alert-danger"
-            />
+         <div className="d-flex flex-column  p-4 rounded container">
+          <label htmlFor="showers" className="font-bolder">
+            showers:
+          </label>
+          <input
+            className="form-control"
+            type="number"
+            value={showers}
+            onChange={(e) => {
+              setShowers(+e.target.value);
+            }}
+          />
         </div>
-          <div className="col-12">
-            <button
-            //   disabled={isLoading}
-              className="btn btn-primary"
-              type="submit"
-            >
-              Register
-            </button>
-          </div>
-        </Form>
-      </Formik>
+        <div className="d-flex flex-column  p-4 rounded container">
+          <label htmlFor="img" className="font-bolder">
+            img:
+          </label>
+          <input
+            className="form-control"
+            type="text"
+            value={img}
+            onChange={(e) => {
+              setImg(e.target.value);
+            }}
+          
+          />
+        </div>
+        <button
+            className="btn btn-success"
+            onClick={() => {
+              addHotelToDb();
+              Swal.fire("Your Game has been added", "", "success");
+
+            }}
+          >
+            Add My Hotel
+          </button>
+
+
     </div>
 
   )

@@ -1,21 +1,19 @@
 import axios from "axios";
 
-const baseURL = "http://localhost:3001";
+const baseURL = "http://localhost:3001/api/hotels/addproperty";
 
 const adding = (
   name: string,
   rooms: number,
   location: string,
-  ac: boolean,
   toilets: number,
   showers: number,
   img: string
 ) => {
-  return axios.post(baseURL + "/addproperty", {
+  return axios.post(baseURL, {
     name,
     rooms,
     location,
-    ac,
     toilets,
     showers,
     img,

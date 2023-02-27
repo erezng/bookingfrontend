@@ -23,7 +23,6 @@ export type ListHotel = {
   name: string;
   rooms: number;
   location: string;
-  ac: boolean;
   toilets: number;
   showers: number;
   img: string;
