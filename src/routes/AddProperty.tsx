@@ -137,7 +137,7 @@ const Addproperty = () => {
             className="btn btn-success"
             onClick={() => {
               addHotelToDb();
-              Swal.fire("Your Game has been added", "", "success");
+              Swal.fire("Your Hotel has been added", "", "success");
 
             }}
           >
