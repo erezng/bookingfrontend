@@ -1,0 +1,54 @@
+.btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: none;
+    background: none;
+}
+
+.btntrash {
+    background: none;
+    position: absolute;
+    bottom: 0;
+    border: none;
+}
+
+.pencil {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border: none;
+    background: none;
+}
+
+.title {
+    color: white;
+    position: absolute;
+    text-decoration: dotted;
+    text-shadow: #800D0D 2px 4px 4px;
+    margin: 0;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+}
+
+.moredetails {
+    font-weight: bold;
+    position: absolute;
+    background-color: rgb(141, 141, 141);
+    border: none;
+    border-radius: 50px 50px;
+    opacity: 0.7;
+    width: 30%;
+
+    :hover {
+        opacity: 0.5;
+    }
+}
+
+.card {
+    margin-bottom: 20px;
+    margin-top: 5px;
+    border-radius: 15px 50px 30px;
+    background-color: #F2F3AE;
+}

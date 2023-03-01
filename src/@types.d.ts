@@ -19,11 +19,15 @@ export type LoginFormType = {
   email: string;
   password: string;
 };
-export type ListHotel = {
+export type Hotel = {
+  _id: string;
   name: string;
   rooms: number;
   location: string;
   toilets: number;
   showers: number;
   img: string;
+};
+export type showhotels = {
+  card: Hotel[];
 };

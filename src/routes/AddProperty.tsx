@@ -1,5 +1,5 @@
 import * as Yup from "yup";
-import { ListHotel } from "../@types";
+import { Hotel } from "../@types";
 import addservice from "../services/Add.service";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { Navigate, useNavigate } from "react-router-dom";
@@ -30,7 +30,7 @@ const Addproperty = () => {
       .catch((e) => console.log(e));
   };
 
-    const handleAdd=(formvalues:ListHotel)=>{
+    const handleAdd=(formvalues:Hotel)=>{
       
         const {name,rooms,location,toilets,showers,img}=formvalues;
         addservice(name,rooms,location,toilets,showers,img)
