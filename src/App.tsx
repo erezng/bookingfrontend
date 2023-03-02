@@ -13,6 +13,7 @@ import BrandBar from "./components/BrandBar";
 import Addproperty from "./routes/AddProperty";
 import ListHotels from "./routes/hotels/ListHotels";
 import HotelDetails from "./routes/hotels/HotelDetails";
+import UpdateHotel from "./routes/hotels/UpdateHotel";
 // import HotelContext from "./context/HotelContext";
 function App() {
   const { isLoggedIn } = useContext(AuthContext);
@@ -30,6 +31,7 @@ function App() {
 
         {isLoggedIn && <Route path="/about" element={<About />} />}
         <Route path="/addproperty" element={<Addproperty />} />
+        <Route path="/edit/:_id" element={<UpdateHotel />} />
         {!isLoggedIn && <Route path="/login" element={<Login />} />}
         {!isLoggedIn && <Route path="/register" element={<Register />} />}
       </Routes>

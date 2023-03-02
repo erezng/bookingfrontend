@@ -1,9 +1,8 @@
 import * as Yup from "yup";
 import { Hotel } from "../@types";
 import addservice from "../services/Add.service";
-import { ErrorMessage, Field, Form, Formik } from "formik";
 import { Navigate, useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import Swal from "sweetalert2";
 
 const Addproperty = () => {
@@ -39,8 +38,8 @@ const Addproperty = () => {
     addservice(name, rooms, location, toilets, showers, img)
       .then((res) => {
         console.log(res.data);
-        // alert("hotel saved!"); //swal //modal
-        Swal.fire("Your Hotel has been added", "", "success");
+        alert("hotel saved!"); //swal //modal
+        //swal
         nav("/");
       })
       .catch((e) => {
@@ -138,6 +137,7 @@ const Addproperty = () => {
         className="btn btn-success"
         onClick={() => {
           addHotelToDb();
+          Swal.fire("Your Hotel has been added", "", "success");
         }}
       >
         Add My Hotel
