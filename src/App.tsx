@@ -11,7 +11,6 @@ import AuthContext from "./context/AuthContext";
 import TopNavbar from "./components/Navbar";
 import BrandBar from "./components/BrandBar";
 import Addproperty from "./routes/AddProperty";
-import HotelList from "./routes/hotels/HotelList";
 import ListHotels from "./routes/hotels/ListHotels";
 import HotelDetails from "./routes/hotels/HotelDetails";
 // import HotelContext from "./context/HotelContext";
