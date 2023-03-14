@@ -130,7 +130,6 @@ const UpdateHotel = () => {
         className="btn btn-success"
         onClick={() => {
           updateHotelToDb();
-          Swal.fire("Updated successfully!", "", "success");
         }}
       >
         Update My Hotel
