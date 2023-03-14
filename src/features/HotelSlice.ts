@@ -1,6 +1,5 @@
 import { Hotel } from "../@types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-// import { fetchHotels } from "../services/PropertyList.service";
 
 export type CardsState = {
   cards: Hotel[];

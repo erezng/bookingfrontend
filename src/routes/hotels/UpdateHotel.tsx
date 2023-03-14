@@ -1,7 +1,3 @@
-import * as Yup from "yup";
-import { Hotel } from "../../@types";
-import addservice from "../../services/Add.service";
-import { ErrorMessage, Field, Form, Formik } from "formik";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
@@ -10,23 +6,27 @@ const UpdateHotel = () => {
   //Get hotel details from server
   const nav = useNavigate();
   const { _id } = useParams();
-  const [hotel, setHotel] = useState<Hotel>();
+  const [name, setName] = useState("");
+  const [rooms, setRooms] = useState(1);
+  const [location, setLocation] = useState("");
+  const [toilets, setToilets] = useState(1);
+  const [img, setImg] = useState("");
+  const [showers, setShowers] = useState(1);
   const [errMessage, setErrMessage] = useState<string | undefined>(undefined);
   const url = `http://localhost:3001/api/hotels/hotel/${_id}`;
   const getHotel = () => {
     fetch(url)
       .then((res) => res.json())
-      .then((json) => setHotel(json));
+      .then((result) => {
+        setName(result.name)
+        setRooms(result.rooms)
+        setLocation(result.location)
+        setToilets(result.toilets)
+        setImg(result.img)
+        setShowers(result.showers)
+      });
   };
   useEffect(getHotel, []);
-
-  const [name, setName] = useState(hotel?.name);
-  const [rooms, setRooms] = useState(hotel?.rooms ?? 1);
-  const [location, setLocation] = useState(hotel?.location ?? "");
-  const [toilets, setToilets] = useState(hotel?.toilets ?? 1);
-  const [img, setImg] = useState(hotel?.img ?? "");
-  const [showers, setShowers] = useState(hotel?.showers ?? 1);
-
   const updateHotelToDb = () => {
     const newHotel = {
       name,

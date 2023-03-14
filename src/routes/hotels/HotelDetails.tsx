@@ -15,6 +15,14 @@ const HotelDetails = () => {
       .then((json) => setHotel(json));
   };
   useEffect(getHotel, []);
+
+  const DeleteHotel = () => {
+    fetch('http://localhost:3001/api/hotels/delete/' + _id, {
+    method: 'DELETE',
+    })
+    .then(res => res.json())
+    .then(res => alert("Hotel deleted!"))
+}
   return (
     <div>
       <h2>{hotel?.name}</h2>
@@ -24,6 +32,11 @@ const HotelDetails = () => {
         }}
       >
         edit hotel
+      </button>
+      <button
+      onClick={DeleteHotel}
+      >
+        Delete
       </button>
     </div>
   );

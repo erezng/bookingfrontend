@@ -14,12 +14,8 @@ import Addproperty from "./routes/AddProperty";
 import ListHotels from "./routes/hotels/ListHotels";
 import HotelDetails from "./routes/hotels/HotelDetails";
 import UpdateHotel from "./routes/hotels/UpdateHotel";
-// import HotelContext from "./context/HotelContext";
 function App() {
   const { isLoggedIn } = useContext(AuthContext);
-  // const { card } = useContext(HotelContext);
-  // console.log(card);
-
   return (
     <>
       <BrandBar />
@@ -28,7 +24,6 @@ function App() {
         <Route path="/hotels" element={<ListHotels />} />
         <Route path="/" element={<Home />} />
         <Route path="/hotels/:_id" element={<HotelDetails />} />
-
         {isLoggedIn && <Route path="/about" element={<About />} />}
         <Route path="/addproperty" element={<Addproperty />} />
         <Route path="/edit/:_id" element={<UpdateHotel />} />
