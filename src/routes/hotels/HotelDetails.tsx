@@ -17,26 +17,36 @@ const HotelDetails = () => {
   useEffect(getHotel, []);
 
   const DeleteHotel = () => {
-    fetch('http://localhost:3001/api/hotels/delete/' + _id, {
+    fetch(`http://localhost:3001/api/hotels/delete/${_id}`, {
     method: 'DELETE',
     })
     .then(res => res.json())
     .then(res => alert("Hotel deleted!"))
+    nav(-1)
 }
   return (
-    <div>
+    <div className="container card">
       <h2>{hotel?.name}</h2>
-      <button
+      <p>location:{hotel?.location}</p>
+      <p>price:{hotel?.price}</p>
+      <p>weekend:{hotel?.priceweekend}</p>
+      <button className="btn btn-success"
         onClick={() => {
           nav(`/edit/${hotel?._id}`);
         }}
       >
         edit hotel
       </button>
-      <button
+      <button className="btn btn-danger"
       onClick={DeleteHotel}
       >
         Delete
+      </button>
+      <button
+        className="btn btn-info"
+        onClick={()=>nav(-1)}
+      >
+        Go back
       </button>
     </div>
   );

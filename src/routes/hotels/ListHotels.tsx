@@ -15,11 +15,15 @@ const ListHotels = () => {
   useEffect(getHotels, []);
 
   return (
-    <div>
+    <div className="container ">
       {hotels?.map((hotel) => (
-        <div key={hotel._id}>
-          <p>{hotel.name}</p>
-          <button
+        <div className="card" key={hotel._id}>
+          <p className="text-center">{hotel.name}</p>
+          <p>location:{hotel?.location}</p>
+          <p>price:{hotel?.price}</p>
+          <p>weekend:{hotel?.priceweekend}</p>
+          <button         
+          className="btn btn-info"
             onClick={() => {
               nav(`/hotels/${hotel._id}`);
             }}

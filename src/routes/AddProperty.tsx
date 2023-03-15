@@ -14,6 +14,8 @@ const Addproperty = () => {
   const [toilets, setToilets] = useState(1);
   const [img, setImg] = useState("");
   const [showers, setShowers] = useState(1);
+  const [price, setPrice] = useState(1);
+  const [priceweekend, setPriceweekend] = useState(1);
   // const {name,rooms,location,toilets,showers,img}=formvalues;
   const addHotelToDb = () => {
     const newHotel = {
@@ -23,6 +25,8 @@ const Addproperty = () => {
       toilets,
       showers,
       img,
+      price,
+      priceweekend
     };
     fetch("http://localhost:3001/api/hotels/addproperty", {
       method: "POST",
@@ -130,6 +134,32 @@ const Addproperty = () => {
           value={img}
           onChange={(e) => {
             setImg(e.target.value);
+          }}
+        />
+      </div>
+            <div className="d-flex flex-column  p-4 rounded container">
+        <label htmlFor="price" className="font-bolder">
+          price:
+        </label>
+        <input
+          className="form-control"
+          type="number"
+          value={price}
+          onChange={(e) => {
+            setPrice(+e.target.value);
+          }}
+        />
+      </div>
+            <div className="d-flex flex-column  p-4 rounded container">
+        <label htmlFor="priceweekend" className="font-bolder">
+          priceweekend:
+        </label>
+        <input
+          className="form-control"
+          type="number"
+          value={priceweekend}
+          onChange={(e) => {
+          setPriceweekend(+e.target.value);
           }}
         />
       </div>

@@ -133,6 +133,12 @@ const UpdateHotel = () => {
         }}
       >
         Update My Hotel
+      </button>      
+      <button
+        className="btn btn-info"
+        onClick={()=>nav(-1)}
+      >
+        Go back
       </button>
     </div>
   );

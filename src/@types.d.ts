@@ -27,6 +27,8 @@ export type Hotel = {
   toilets: number;
   showers: number;
   img: string;
+  price:number;
+  priceweekend:number;
 };
 export type showhotels = {
   card: Hotel[];
