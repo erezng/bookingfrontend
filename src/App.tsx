@@ -14,6 +14,8 @@ import Addproperty from "./routes/AddProperty";
 import ListHotels from "./routes/hotels/ListHotels";
 import HotelDetails from "./routes/hotels/HotelDetails";
 import UpdateHotel from "./routes/hotels/UpdateHotel";
+import AddFlight from "./routes/AddFlight";
+import ListFlights from "./routes/hotels/ListFlights";
 function App() {
   const { isLoggedIn } = useContext(AuthContext);
   return (
@@ -22,10 +24,12 @@ function App() {
       <TopNavbar />
       <Routes>
         <Route path="/hotels" element={<ListHotels />} />
+        <Route path="/flights" element={<ListFlights />} />
         <Route path="/" element={<Home />} />
         <Route path="/hotels/:_id" element={<HotelDetails />} />
         {isLoggedIn && <Route path="/about" element={<About />} />}
         <Route path="/addproperty" element={<Addproperty />} />
+        <Route path="/addflight" element={<AddFlight />} />
         <Route path="/edit/:_id" element={<UpdateHotel />} />
         {!isLoggedIn && <Route path="/login" element={<Login />} />}
         {!isLoggedIn && <Route path="/register" element={<Register />} />}

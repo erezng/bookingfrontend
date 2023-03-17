@@ -26,10 +26,11 @@ const HotelDetails = () => {
 }
   return (
     <div className="container card">
-      <h2>{hotel?.name}</h2>
+      <h1>{hotel?.name}</h1>
       <p>location:{hotel?.location}</p>
       <p>price:{hotel?.price}</p>
       <p>weekend:{hotel?.priceweekend}</p>
+      <p><img className="w-100" src={hotel?.img} alt="" /></p>
       <button className="btn btn-success"
         onClick={() => {
           nav(`/edit/${hotel?._id}`);

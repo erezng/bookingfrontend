@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 import { Hotel } from "../@types";
-import addservice from "../services/Add.service";
+import addservice from "../services/Add.hotel.service";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Swal from "sweetalert2";
@@ -37,25 +37,6 @@ const Addproperty = () => {
       .catch((e) => console.log(e));
   };
 
-  const handleAdd = (formvalues: Hotel) => {
-    const { name, rooms, location, toilets, showers, img } = formvalues;
-    addservice(name, rooms, location, toilets, showers, img)
-      .then((res) => {
-        console.log(res.data);
-        alert("hotel saved!"); //swal //modal
-        //swal
-        nav("/");
-      })
-      .catch((e) => {
-        console.log(e);
-        setErrMessage(JSON.stringify(e.response.data));
-      })
-      .finally(() => {
-        // setIsLoading(false);
-      });
-  };
-
-  // }
   return (
     <div>
       {errMessage && <div>${errMessage}</div>}

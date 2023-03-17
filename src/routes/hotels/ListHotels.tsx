@@ -15,13 +15,14 @@ const ListHotels = () => {
   useEffect(getHotels, []);
 
   return (
-    <div className="container ">
+    <div className="container  ">
       {hotels?.map((hotel) => (
         <div className="card" key={hotel._id}>
-          <p className="text-center">{hotel.name}</p>
+          <h1 className="text-center">{hotel.name}</h1>
           <p>location:{hotel?.location}</p>
           <p>price:{hotel?.price}</p>
           <p>weekend:{hotel?.priceweekend}</p>
+          <p><img className="w-100" src={hotel?.img} alt="" /></p>
           <button         
           className="btn btn-info"
             onClick={() => {

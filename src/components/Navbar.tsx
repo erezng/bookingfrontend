@@ -21,7 +21,7 @@ function TopNavbar() {
             <NavLink className={css.title} to="/hotels">
               <MdLocalHotel /> Stay
             </NavLink>
-            <NavLink className={css.title} to="/">
+            <NavLink className={css.title} to="/flights">
               <MdFlight /> Flight
             </NavLink>
             <NavLink className={css.title} to="/">
@@ -37,6 +37,9 @@ function TopNavbar() {
               <FaTaxi /> Airport taxi
             </NavLink>
           </Nav>
+          <NavLink className={css.title} to="/addflight">
+              List your flight
+            </NavLink>
         </Navbar.Collapse>
       </Container>
     </Navbar>

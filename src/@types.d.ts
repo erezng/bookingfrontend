@@ -33,3 +33,9 @@ export type Hotel = {
 export type showhotels = {
   card: Hotel[];
 };
+export type Flight={
+  _id:string;
+  from:string;
+  dst:string;
+  price:number;
+}
