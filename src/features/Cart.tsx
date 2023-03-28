@@ -7,7 +7,7 @@ const Cart = () => {
     const cartArr=localStorage.getItem("cart");
     const [cart,setCart]=useState<[]>([])
     if(cartArr){
-        setCart(JSON.parse(cartArr));    
+        // setCart(JSON.parse(cartArr));    
     };
     const [hotels, sethotels] = useState<Hotel[]>([]);
     const getHotels = () => {
