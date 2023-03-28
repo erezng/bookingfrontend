@@ -1,11 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { Flight } from "../@types";
 
 const AddFlight = () => {
   const nav = useNavigate();
-  const [errMessage, setErrMessage] = useState<string | undefined>(undefined);
   const [from, setFrom] = useState("");
   const [dst, setDst] = useState("");
   const [price, setPrice] = useState(0);
@@ -25,7 +23,6 @@ const AddFlight = () => {
   };
   return (
     <div className="container">
-      {errMessage && <div>${errMessage}</div>}
       <div className="d-flex flex-column  p-4 rounded container">
         <label htmlFor="from" className="font-bolder">
           from:
@@ -74,6 +71,12 @@ const AddFlight = () => {
         }}
       >
         Add flight
+      </button>
+      <button
+        className="btn btn-info"
+        onClick={()=>nav(-1)}
+      >
+        Go back
       </button>
     </div>
   );

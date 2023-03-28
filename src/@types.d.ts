@@ -29,6 +29,8 @@ export type Hotel = {
   img: string;
   price:number;
   priceweekend:number;
+  isfav:boolean;
+  cart:boolean;
 };
 export type showhotels = {
   card: Hotel[];
@@ -38,4 +40,16 @@ export type Flight={
   from:string;
   dst:string;
   price:number;
+}
+
+export type Hotels = {
+  loading: boolean;
+  error: string;
+  hotels: Hotel[];
+};
+
+export interface Cart{
+  cartItems:[];
+  CartTotalQuantity:number;
+  CartTotalAmount:number;
 }

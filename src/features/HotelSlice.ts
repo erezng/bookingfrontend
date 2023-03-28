@@ -1,36 +1,68 @@
-import { Hotel } from "../@types";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { fetchHotels } from './Hotelslist';
+import { Hotel, Hotels } from './../@types.d';
+import { createSlice, PayloadAction,createAsyncThunk } from "@reduxjs/toolkit";
 
-export type CardsState = {
-  cards: Hotel[];
+const initialState: Hotels = {
+  hotels: [],
+  error: "",
+  loading: false,
 };
-const initialState: CardsState = {
-  cards: [],
-};
+export const fetchhotellist=createAsyncThunk<Hotel[]>('fetchhotels',fetchHotels);
+
 export const cardsSlice = createSlice({
-  name: "cards",
+  name: "hotels",
   initialState,
   reducers: {
-    addCard: (state, action: PayloadAction<Hotel>) => {
-      state.cards.push(action.payload);
-    },
-    editCard: (state, action) => {
-      const CardToEdit = action.payload;
-      const index = state.cards.findIndex((c) => c._id === action.payload.id);
-      state.cards[index] = CardToEdit;
-    },
-    deleteCard: (state, action) => {
-      const index = state.cards.findIndex((c) => c._id === action.payload);
-      state.cards.splice(index, 1);
-    },
-    toggleFavorite: (state, { payload }: PayloadAction<string>) => {
-      const index = state.cards.findIndex((a) => a._id === payload);
+    toggleCart: (fetchhotellist, { payload }: PayloadAction<any>) => {
+      console.log(fetchhotellist);
+      
+      const index = fetchhotellist.hotels.findIndex((a) => a._id === payload);
       if (index !== -1) {
-        // state.cards[index].isfavorite = !state.cards[index].isfavorite;
+      //   fetchhotellist.hotels[index].isfav = !fetchhotellist.hotels[index].isfav;
       }
+      const isCart=localStorage.getItem("cart");
+      if(isCart){
+        const cartArr=JSON.parse(isCart);
+        cartArr.push(payload);
+        localStorage.setItem("cart",JSON.stringify(cartArr));
+      }
+      else{
+        let myIdArray:string[]  =[];
+        myIdArray.push(payload)
+        localStorage.setItem("cart",JSON.stringify(myIdArray));
+      }
+      // localstorage cart : ["page"]
+      //  localstorage: ["amazing hotel"] undefined.push
+    },
+    toggleFavorite: (fetchhotellist, { payload }: PayloadAction<any>) => {
+      console.log(fetchhotellist);
+      const index = fetchhotellist.hotels.findIndex((a) => a._id === payload);
+      if (index !== -1) {
+        fetchhotellist.hotels[index].isfav = !fetchhotellist.hotels[index].isfav;
+      }
+      localStorage.setItem(JSON.stringify(payload),"fav");
     },
   },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchhotellist.pending, (state, action) => {
+        state.loading = true;
+        state.error = "";
+        state.hotels = [];
+      })
+      .addCase(fetchhotellist.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message ?? "Something went wrong";
+        state.hotels = [];
+      })
+      .addCase(fetchhotellist.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = "";
+        state.hotels = action.payload;
+      });
+  },
 });
-export const { addCard, deleteCard, editCard, toggleFavorite } =
+
+export const { toggleFavorite,toggleCart } =
   cardsSlice.actions;
 export default cardsSlice.reducer;

@@ -8,15 +8,22 @@ import "./index.css";
 import "bootstrap/scss/bootstrap.scss";
 import { BrowserRouter } from "react-router-dom";
 import { AuthContextProvider } from "./context/AuthContext";
+import { IconContext } from "react-icons/lib";
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import 'bootstrap-css-only/css/bootstrap.min.css';
+import 'mdbreact/dist/css/mdb.css';
+
 const container = document.getElementById("root")!;
 const root = createRoot(container);
 
 root.render(
   <BrowserRouter>
     <AuthContextProvider>
+      <IconContext.Provider value={{ size: "30px" }}>
       <Provider store={store}>
         <App />
       </Provider>
+    </IconContext.Provider>
     </AuthContextProvider>
   </BrowserRouter>
 );

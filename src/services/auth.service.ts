@@ -11,8 +11,8 @@ const login = (email: string, password: string) => {
     const email = res.data.email;
     const username = res.data.username;
     if (token) {
-      localStorage.setItem("token", token);
-      localStorage.setItem("user", username);
+      localStorage.setItem("token", JSON.stringify(res.data ));
+      // localStorage.setItem("user", username);
     }
     return res.data;
   });

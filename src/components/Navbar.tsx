@@ -8,6 +8,7 @@ import css from "./NavBar.module.scss";
 import { MdLocalHotel, MdFlight, MdAttractions } from "react-icons/md";
 import { RiSuitcaseLine } from "react-icons/ri";
 import { FaCar, FaTaxi } from "react-icons/fa";
+import { BsCart3 } from "react-icons/bs";
 
 function TopNavbar() {
   const { isLoggedIn } = useContext(AuthContext);
@@ -39,6 +40,9 @@ function TopNavbar() {
           </Nav>
           <NavLink className={css.title} to="/addflight">
               List your flight
+            </NavLink>
+            <NavLink className={css.title} to="/cart">
+              <BsCart3 />
             </NavLink>
         </Navbar.Collapse>
       </Container>

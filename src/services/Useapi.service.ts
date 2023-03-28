@@ -1,6 +1,5 @@
 import { Hotel } from "./../@types.d";
 import { useEffect, useState } from "react";
-// export const url = "http://localhost:3001/api/hotels/allhotels";
 
 const useApi = (url: string) => {
   const [hotel, setHotel] = useState<Hotel[]>();

@@ -1,7 +1,4 @@
-import * as Yup from "yup";
-import { Hotel } from "../@types";
-import addservice from "../services/Add.hotel.service";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Swal from "sweetalert2";
 
@@ -16,6 +13,8 @@ const Addproperty = () => {
   const [showers, setShowers] = useState(1);
   const [price, setPrice] = useState(1);
   const [priceweekend, setPriceweekend] = useState(1);
+  const isfav = false;
+  const cart = false;
   // const {name,rooms,location,toilets,showers,img}=formvalues;
   const addHotelToDb = () => {
     const newHotel = {
@@ -26,7 +25,9 @@ const Addproperty = () => {
       showers,
       img,
       price,
-      priceweekend
+      priceweekend,
+      isfav,
+      cart
     };
     fetch("http://localhost:3001/api/hotels/addproperty", {
       method: "POST",
@@ -34,7 +35,10 @@ const Addproperty = () => {
       body: JSON.stringify(newHotel),
     })
       .then((res) => res.json())
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        setErrMessage(e)
+        console.log(e)
+      });
   };
 
   return (
@@ -144,6 +148,8 @@ const Addproperty = () => {
           }}
         />
       </div>
+    <div className="container">
+      
       <button
         className="btn btn-success"
         onClick={() => {
@@ -153,6 +159,13 @@ const Addproperty = () => {
       >
         Add My Hotel
       </button>
+      <button
+        className="btn btn-info"
+        onClick={()=>nav(-1)}
+      >
+        Go back
+      </button>
+    </div>
     </div>
   );
 };

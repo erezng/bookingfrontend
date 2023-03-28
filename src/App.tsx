@@ -1,6 +1,4 @@
 import React, { useContext } from "react";
-// import logo from './logo.svg';
-import { Counter } from "./features/counter/Counter";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Home from "./routes/Home";
@@ -16,6 +14,8 @@ import HotelDetails from "./routes/hotels/HotelDetails";
 import UpdateHotel from "./routes/hotels/UpdateHotel";
 import AddFlight from "./routes/AddFlight";
 import ListFlights from "./routes/hotels/ListFlights";
+import FooterBar from "./components/FooterBar";
+import Cart from "./features/Cart";
 function App() {
   const { isLoggedIn } = useContext(AuthContext);
   return (
@@ -25,6 +25,7 @@ function App() {
       <Routes>
         <Route path="/hotels" element={<ListHotels />} />
         <Route path="/flights" element={<ListFlights />} />
+        <Route path="/cart" element={<Cart />} />
         <Route path="/" element={<Home />} />
         <Route path="/hotels/:_id" element={<HotelDetails />} />
         {isLoggedIn && <Route path="/about" element={<About />} />}
@@ -33,7 +34,9 @@ function App() {
         <Route path="/edit/:_id" element={<UpdateHotel />} />
         {!isLoggedIn && <Route path="/login" element={<Login />} />}
         {!isLoggedIn && <Route path="/register" element={<Register />} />}
+        
       </Routes>
+      <FooterBar/>
     </>
   );
 }
