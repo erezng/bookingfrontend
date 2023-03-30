@@ -1,28 +1,33 @@
 import { useEffect, useState } from "react";
 import { Hotel } from "../@types";
-import { fetchHotels } from "../services/PropertyList.service";
 import { FaHeart, FaRegHeart,FaCartArrowDown,FaShoppingCart } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
-    const cartArr=localStorage.getItem("cart");
+    const nav = useNavigate();
     const [cart,setCart]=useState<[]>([])
-    if(cartArr){
-        // setCart(JSON.parse(cartArr));    
-    };
     const [hotels, sethotels] = useState<Hotel[]>([]);
+    const [list, setList] = useState<Hotel[]>([])
     const getHotels = () => {
-    const url = "http://localhost:3001/api/hotels/allhotels";
-    fetch(url)
-        .then((res) => res.json())
-        .then((json) => sethotels(json));
+      const cartArr=localStorage.getItem("cart");
+      if(cartArr){
+        setCart(JSON.parse(cartArr)); 
+        const url = "http://localhost:3001/api/hotels/allhotels";
+        fetch(url)
+         .then((res) => res.json())
+         .then((json) => sethotels(json));
     };
+    setList(cart.map((cartItem)=>{
+        const filtercart:Hotel[]=hotels?.filter((hotel) => hotel._id === cartItem);
+        console.log(filtercart);
+        return filtercart[0] // filtter return an array
+    }) )
+  };
     useEffect(getHotels, []);
+    
     // cart. loop
     //  newArrayOfHotels
-    const newArray = cart.map((cartItem)=>{
-        const filtercart:Hotel[]=hotels?.filter((hotel) => hotel._id === cartItem);
-        return filtercart[0] // filtter return an array
-    }) 
+    // 
     // filtercart[0]
     // hotels?.forEach(hotel=>{
     // cart.forEach(id => {
@@ -33,7 +38,7 @@ const Cart = () => {
     // });   
   return (
  <div className="container  ">
-      {newArray?.map((hotel) => (
+      {list?.map((hotel) => (
         <div className="card" key={hotel._id}>
           <button className="" onClick={()=>{}}>
             {hotel?.isfav&& <FaHeart/>}
@@ -51,7 +56,7 @@ const Cart = () => {
           <button         
           className="btn btn-info"
             onClick={() => {
-            //   nav(`/hotels/${hotel._id}`);
+              nav(`/hotels/${hotel._id}`);
             }}
           >
             click
