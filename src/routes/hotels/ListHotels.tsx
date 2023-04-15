@@ -3,27 +3,43 @@ import { useNavigate } from "react-router-dom";
 import { Hotel } from "../../@types";
 import { FaHeart, FaRegHeart,FaCartArrowDown,FaShoppingCart } from "react-icons/fa";
 import css from "./HotelDetails.module.scss"
+import { fetchhotellist, toggleCart, toggleFavorite } from "../../features/HotelSlice";
+import { useAppDispatch } from "../../app/hooks";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "../../app/store";
 
 const ListHotels = () => {
   const nav = useNavigate();
-  const [hotels, sethotels] = useState<Hotel[] | undefined>();
-  const getHotels = () => {
-    const url = "http://localhost:3001/api/hotels/allhotels";
-    fetch(url)
-      .then((res) => res.json())
-      .then((json) => sethotels(json));
-  };
-  useEffect(getHotels, []);
+  // const [hotels, sethotels] = useState<Hotel[]>([]);
+  const favArray=localStorage.getItem("fav");      
+  const isCart=localStorage.getItem("cart");
+  const dispatch = useDispatch<AppDispatch>()
+
+  useEffect(() => {
+    dispatch(fetchhotellist())
+  }, [dispatch])
+  
+  const hotels = useSelector((state:any) => state.content.hotels)
+  const isLoading = useSelector((state:any) => state.content.isLoading)
+  const error = useSelector((state:any) => state.content.error)
+
+  if (isLoading) {
+    return 'loading...'
+  }
+
+  if (error) {
+    return error
+  }
 
   return (
-    <div className="container  ">
-      {hotels?.map((hotel) => (
+    <div className="container">
+      {hotels?.map((hotel:any) => (
         <div className="card" key={hotel._id}>
-          <button className={css.btn} onClick={()=>{}}>
-            {hotel?.isfav&& <FaHeart/>}
+          <button id="fav" className={css.btn} onClick={()=>{dispatch(toggleFavorite(hotel._id))}}>
+            {hotel?.isfav&&<FaHeart/>}
             {!hotel?.isfav&&<FaRegHeart/>}
             </button> 
-          <button className={css.btncart} onClick={()=>{}}>
+          <button className={css.btncart} onClick={()=>{dispatch(toggleCart(hotel?._id))}}>
             {!hotel?.cart&& <FaShoppingCart/>}
             {hotel?.cart&&<FaCartArrowDown/>}
           </button> 

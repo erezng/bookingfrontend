@@ -1,25 +1,31 @@
+import  axios from 'axios';
 import { fetchHotels } from './Hotelslist';
 import { Hotel, Hotels } from './../@types.d';
-import { createSlice, PayloadAction,createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction,createAsyncThunk,current } from "@reduxjs/toolkit";
 
-const initialState: Hotels = {
+export const initialState: Hotels = {
   hotels: [],
   error: "",
   loading: false,
 };
-export const fetchhotellist=createAsyncThunk<Hotel[]>('fetchhotels',fetchHotels);
+
+export const fetchhotellist = createAsyncThunk(
+  'content/fetchContent',
+  async () => {
+    const res = await axios('http://localhost:3001/api/hotels/allhotels')
+    const data = await res.data
+    // console.log(data);
+    return data
+  }
+)
 
 export const cardsSlice = createSlice({
-  name: "hotels",
+  name: "content",
   initialState,
   reducers: {
-    toggleCart: (fetchhotellist, { payload }: PayloadAction<any>) => {
-      console.log(fetchhotellist);
-      
-      const index = fetchhotellist.hotels.findIndex((a) => a._id === payload);
-      if (index !== -1) {
-      //   fetchhotellist.hotels[index].isfav = !fetchhotellist.hotels[index].isfav;
-      }
+    toggleCart: (state, { payload }: PayloadAction<any>) => {
+      const index = state.hotels.findIndex((a) => a._id === payload);
+      state.hotels[index].cart=true
       const isCart=localStorage.getItem("cart");
       if(isCart){
         const cartArr=JSON.parse(isCart);
@@ -34,14 +40,11 @@ export const cardsSlice = createSlice({
       // localstorage cart : ["page"]
       //  localstorage: ["amazing hotel"] undefined.push
     },
-    toggleFavorite: (fetchhotellist, { payload }: PayloadAction<any>) => {
-      console.log(fetchhotellist);
-      const index = fetchhotellist.hotels.findIndex((a) => a._id === payload);
-      if (index !== -1) {
-        fetchhotellist.hotels[index].isfav = !fetchhotellist.hotels[index].isfav;
-      }
-      localStorage.setItem(JSON.stringify(payload),"fav");
-    },
+    toggleFavorite: (state, { payload }: PayloadAction<any>) => {
+      const index=state.hotels.findIndex((e:any)=>e._id===payload);
+      state.hotels[index].isfav=!state.hotels[index].isfav
+
+     },
   },
   extraReducers: (builder) => {
     builder
@@ -58,8 +61,9 @@ export const cardsSlice = createSlice({
       .addCase(fetchhotellist.fulfilled, (state, action) => {
         state.loading = false;
         state.error = "";
-        state.hotels = action.payload;
+        state.hotels = action.payload
       });
+
   },
 });
 

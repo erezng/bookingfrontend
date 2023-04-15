@@ -5,7 +5,7 @@ import cardsReducer from "../features/HotelSlice";
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
-    cards: cardsReducer,
+    content: cardsReducer,
   },
 });
 
