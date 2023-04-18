@@ -1,37 +1,16 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Hotel } from '../@types';
 import { FaHeart, FaRegHeart,FaCartArrowDown,FaShoppingCart } from "react-icons/fa";
 import css from ".././routes/hotels/Hotel.module.scss"
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from '../app/store';
-import { fetchhotellist } from '../features/HotelSlice';
+import { fetchhotellist, toggleCart, toggleFavorite } from '../features/HotelSlice';
 const Home = () => {
   const nav = useNavigate();
-  // const [hotels, sethotels] = useState<Hotel[] | undefined>();
-//   const getHotels = () => {
-//     const url = "http://localhost:3001/api/hotels/allhotels";
-
-//     fetch(url)
-//       .then((res) => res.json())
-//       .then((json) => sethotels(json));
-//   };
-//   useEffect(getHotels, []);
-//   const [searchInput, setSearchInput] = useState("");
- 
-//   const handleChange = (e:any) => {
-//   e.preventDefault();
-//   setSearchInput(e.target.value);
-// };
-
-// if (searchInput.length > 0) {
-//     hotels?.filter((hotel) => {
-//     return hotel.name.match(searchInput);
-// });
-// }
-const dispatch = useDispatch<AppDispatch>()
+  const dispatch = useDispatch<AppDispatch>()
 
   useEffect(() => {
     dispatch(fetchhotellist())
@@ -51,7 +30,7 @@ const dispatch = useDispatch<AppDispatch>()
 
   return (
     <div className="container">
-      <h2>Where to next, erez?
+      <h2>Where to next?
           Find exclusive Genius rewards in every corner of the world!</h2>
       <div className="card-group">
       {hotels?.map((hotel:Hotel) => (
@@ -59,10 +38,10 @@ const dispatch = useDispatch<AppDispatch>()
 
       <Card.Img variant="top" src={hotel.img} />
       <Card.Body>
-          <button className={css.btn} onClick={()=>{}}>
-            {hotel?.isfav&& <FaHeart/>}
+          <button id="fav" className={css.btn} onClick={()=>{dispatch(toggleFavorite(hotel._id))}}>
+            {hotel?.isfav&&<FaHeart/>}
             {!hotel?.isfav&&<FaRegHeart/>}
-          </button> 
+            </button> 
   
         <Card.Title>{hotel.name}</Card.Title>
         <Card.Text>
@@ -75,10 +54,9 @@ const dispatch = useDispatch<AppDispatch>()
             }}>Take a look</Button>
             
       </Card.Body>
-              <button className={css.btncart} onClick={()=>{}}>
-            {!hotel?.cart&& <FaShoppingCart/>}
-            {hotel?.cart&&<FaCartArrowDown/>}
-          </button> 
+          <button className={css.btncart} onClick={()=>{dispatch(toggleCart(hotel?._id))}}>
+            {hotel.cart===0? <FaShoppingCart/>:<FaCartArrowDown/>}
+          </button>
     </Card>
       ))}
 </div>

@@ -1,39 +1,14 @@
-import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Hotel } from "../../@types";
 import { FaHeart, FaRegHeart,FaCartArrowDown,FaShoppingCart } from "react-icons/fa";
 import css from "./HotelDetails.module.scss"
-import { useAppDispatch } from "../../app/hooks";
-import { toggleCart, toggleFavorite, fetchhotellist } from "../../features/HotelSlice";
+import { toggleCart, toggleFavorite } from "../../features/HotelSlice";
 import { AppDispatch } from "../../app/store";
 import { useDispatch, useSelector } from "react-redux";
 const HotelDetails = () => {
   const nav = useNavigate();
   const dispatch = useDispatch<AppDispatch>()
   const { _id } = useParams();
-  // const [hotel, setHotel] = useState<Hotel>();
-  // const url = `http://localhost:3001/api/hotels/hotel/${_id}`;
-  // const favArray=localStorage.getItem("fav");
-  // const [isfavorite, setIsfavorite] = useState(false);
-  // useEffect(() => {
-  //     dispatch(fetchhotellist())
-  // }, [dispatch])
-  //   const getHotel = () => {
-  //   fetch(url)
-  //     .then((res) => res.json())
-  //     .then((json) => setHotel(json));
-  //     if(favArray){
-  //       const favArr=JSON.parse(favArray);
-  //       const index=favArr.findIndex((e:any)=>e===_id);
-  //       // console.log(index);
-  //       if(index===-1){
-  //         setIsfavorite(false)
-  //       }
-  //       else setIsfavorite(true)
-        
-  // }
-  // };
-  // useEffect(getHotel, []);
   const hotels = useSelector((state:any) => state.content.hotels)
   const isLoading = useSelector((state:any) => state.content.isLoading)
   const error = useSelector((state:any) => state.content.error)

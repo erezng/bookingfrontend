@@ -12,7 +12,6 @@ const login = (email: string, password: string) => {
     const username = res.data.username;
     if (token) {
       localStorage.setItem("token", JSON.stringify(res.data ));
-      // localStorage.setItem("user", username);
     }
     return res.data;
   });

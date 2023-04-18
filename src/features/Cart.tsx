@@ -1,50 +1,38 @@
-import { useEffect, useState } from "react";
-import { Hotel } from "../@types";
-import { FaHeart, FaRegHeart,FaCartArrowDown,FaShoppingCart } from "react-icons/fa";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { FaHeart, FaRegHeart,FaCartArrowDown,FaShoppingCart } from "react-icons/fa";
+import css from "./Favorites.module.scss"
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "../app/store";
+import { toggleCart, toggleFavorite } from "./HotelSlice";
+import { Hotel } from "../@types";
 
-const Cart = () => {
-    const nav = useNavigate();
-    const [cart,setCart]=useState<[]>([])
-    const [hotels, sethotels] = useState<Hotel[]>([]);
-    const [list, setList] = useState<Hotel[]>([])
-    const getHotels = () => {
-      const cartArr=localStorage.getItem("cart");
-      if(cartArr){
-        setCart(JSON.parse(cartArr)); 
-        const url = "http://localhost:3001/api/hotels/allhotels";
-        fetch(url)
-         .then((res) => res.json())
-         .then((json) => sethotels(json));
-    };
-    setList(cart.map((cartItem)=>{
-        const filtercart:Hotel[]=hotels?.filter((hotel) => hotel._id === cartItem);
-        console.log(filtercart);
-        return filtercart[0] // filtter return an array
-    }) )
-  };
-    useEffect(getHotels, []);
-    
-    // cart. loop
-    //  newArrayOfHotels
-    // 
-    // filtercart[0]
-    // hotels?.forEach(hotel=>{
-    // cart.forEach(id => {
-    //     if(hotel._id!==id){
-    //          hotels.pop()  
-    //     }
-    // });
-    // });   
+const Favorites = () => {
+  const nav = useNavigate();
+  const dispatch = useDispatch<AppDispatch>()
+ 
+  const hotels = useSelector((state:any) => state.content.hotels)
+  const isLoading = useSelector((state:any) => state.content.isLoading)
+  const error = useSelector((state:any) => state.content.error)
+
+  if (isLoading) {
+    return 'loading...'
+  }
+
+  if (error) {
+    return error
+  }
+  let favHotels=hotels.filter((hotel:Hotel)=>hotel.cart>0
+  )
   return (
- <div className="container  ">
-      {list?.map((hotel) => (
+    <div className="container">
+      {favHotels?.map((hotel:any) => (
         <div className="card" key={hotel._id}>
-          <button className="" onClick={()=>{}}>
-            {hotel?.isfav&& <FaHeart/>}
+          <button id="fav" className={css.btn} onClick={()=>{dispatch(toggleFavorite(hotel._id))}}>
+            {hotel?.isfav&&<FaHeart/>}
             {!hotel?.isfav&&<FaRegHeart/>}
             </button> 
-          <button className="" onClick={()=>{}}>
+          <button className={css.btncart} onClick={()=>{dispatch(toggleCart(hotel?._id))}}>
             {!hotel?.cart&& <FaShoppingCart/>}
             {hotel?.cart&&<FaCartArrowDown/>}
           </button> 
@@ -64,7 +52,7 @@ const Cart = () => {
         </div>
       ))}
     </div>
-  )
-  }
+  );
+};
 
-export default Cart
+export default Favorites;

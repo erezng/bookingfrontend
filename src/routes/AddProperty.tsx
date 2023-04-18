@@ -14,8 +14,7 @@ const Addproperty = () => {
   const [price, setPrice] = useState(1);
   const [priceweekend, setPriceweekend] = useState(1);
   const isfav = false;
-  const cart = false;
-  // const {name,rooms,location,toilets,showers,img}=formvalues;
+  const cart = 0;
   const addHotelToDb = () => {
     const newHotel = {
       name,

@@ -1,20 +1,14 @@
-import { useState, useEffect } from "react";
+import {  useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Hotel } from "../../@types";
 import { FaHeart, FaRegHeart,FaCartArrowDown,FaShoppingCart } from "react-icons/fa";
 import css from "./HotelDetails.module.scss"
 import { fetchhotellist, toggleCart, toggleFavorite } from "../../features/HotelSlice";
-import { useAppDispatch } from "../../app/hooks";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../app/store";
 
 const ListHotels = () => {
   const nav = useNavigate();
-  // const [hotels, sethotels] = useState<Hotel[]>([]);
-  const favArray=localStorage.getItem("fav");      
-  const isCart=localStorage.getItem("cart");
   const dispatch = useDispatch<AppDispatch>()
-
   useEffect(() => {
     dispatch(fetchhotellist())
   }, [dispatch])
@@ -40,8 +34,7 @@ const ListHotels = () => {
             {!hotel?.isfav&&<FaRegHeart/>}
             </button> 
           <button className={css.btncart} onClick={()=>{dispatch(toggleCart(hotel?._id))}}>
-            {!hotel?.cart&& <FaShoppingCart/>}
-            {hotel?.cart&&<FaCartArrowDown/>}
+            {hotel.cart===0? <FaShoppingCart/>:<FaCartArrowDown/>}
           </button> 
           <h1 className="text-center">{hotel.name}</h1>
           <p>location:{hotel?.location}</p>

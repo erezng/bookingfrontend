@@ -2,13 +2,11 @@ import { BsPencil, BsTrash } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../app/hooks";
 import Swal from "sweetalert2";
-// import { FaHeart, FaRegHeart } from "react-icons/fa";
 import css from "./CardItem.module.scss";
 import { Hotel } from "../../@types";
 
 const CardItem = (props: Hotel) => {
   const nav = useNavigate();
-  const dispatch = useAppDispatch();
   return (
     <div className={css.container}>
       <div className={`card ${css.card}`}>
@@ -24,11 +22,8 @@ const CardItem = (props: Hotel) => {
         <button
           className={css.btn}
           onClick={() => {
-            // dispatch(toggleFavorite(props.id));
           }}
         >
-          {/* {props.isfavorite && <FaHeart />} */}
-          {/* {!props.isfavorite && <FaRegHeart />} */}
         </button>
 
         <button
@@ -49,7 +44,6 @@ const CardItem = (props: Hotel) => {
               denyButtonText: `No`,
             }).then((result) => {
               if (result.isConfirmed) {
-                // dispatch(deleteCard(props.id));
                 Swal.fire("Deleted!", "", "success");
               } else if (result.isDenied) {
                 Swal.fire("Keeping the card", "", "info");

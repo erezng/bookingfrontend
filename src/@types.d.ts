@@ -30,7 +30,7 @@ export type Hotel = {
   price:number;
   priceweekend:number;
   isfav:boolean;
-  cart:boolean;
+  cart:number;
 };
 export type showhotels = {
   card: Hotel[];

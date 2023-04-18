@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
 import { Hotel } from "./../@types.d";
-import axios from "axios";
 
 export const url = "http://localhost:3001/api/hotels";
 
@@ -11,7 +9,7 @@ export const fetchHotels = () =>
     .then((hotels) => {
       hotels.forEach((a) => {
          a.isfav = false;
-         a.cart=false;
+         a.cart=0;
       });
       return fetchHotels;
     });

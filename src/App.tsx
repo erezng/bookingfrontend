@@ -17,6 +17,7 @@ import ListFlights from "./routes/hotels/ListFlights";
 import FooterBar from "./components/FooterBar";
 import Cart from "./features/Cart";
 import Favorites from "./features/Favorites";
+import UserFind from "./components/SearchBar";
 
 
 function App() {
@@ -26,20 +27,9 @@ function App() {
 
   return (
     <>
-    {/* <div className='grid gap-4 grid-cols-2  md:grid-cols-4 lg:grid-cols-8  p-4'>
-      {contents.map((content:any) => (
-        <div key={content.id}>
-          <img
-            src={`${content.thumbnailUrl}`}
-            alt={`${content.title}`}
-            className='w-full h-full rounded'
-          />
-        </div>
-      ))}
-    </div> */}
-
       <BrandBar />
       <TopNavbar />
+      <UserFind/>
       <Routes>
         <Route path="/hotels" element={<ListHotels />} />
         <Route path="/flights" element={<ListFlights />} />

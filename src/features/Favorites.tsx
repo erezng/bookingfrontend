@@ -1,64 +1,37 @@
-import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaHeart, FaRegHeart,FaCartArrowDown,FaShoppingCart } from "react-icons/fa";
-import { useAppDispatch } from "../app/hooks";
-import { Hotel } from "../@types";
+import css from "./Favorites.module.scss"
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "../app/store";
 import { toggleCart, toggleFavorite } from "./HotelSlice";
+import { Hotel } from "../@types";
 
 const Favorites = () => {
-  const dispatch=useAppDispatch();
   const nav = useNavigate();
-  const [hotels, sethotels] = useState<Hotel[]>([]);
-  const favArray=localStorage.getItem("fav");      
-  const isCart=localStorage.getItem("cart");
+  const dispatch = useDispatch<AppDispatch>()
+ 
+  const hotels = useSelector((state:any) => state.content.hotels)
+  const isLoading = useSelector((state:any) => state.content.isLoading)
+  const error = useSelector((state:any) => state.content.error)
 
-  const getHotels = () => {
-    const url = "http://localhost:3001/api/hotels/allhotels";
-    fetch(url)
-      .then((res) => res.json())
-      .then((json) => sethotels(json));
-  };
-  useEffect(getHotels, []);
-
-  if(favArray){
-    const favArr=JSON.parse(favArray);
-  for (let i = 0; i <hotels.length; i++) {
-    const index=favArr.findIndex((e:any)=>e===hotels[i]._id);
-    if(index!==-1){
-      hotels[i].isfav=true;
-    }
-    else{
-      hotels[i].isfav=false;
-    }
-  }  
-  if(isCart){
-    const cartArr=JSON.parse(isCart);
-  for (let i = 0; i <hotels.length; i++) {
-    const index=cartArr.findIndex((e:any)=>e===hotels[i]._id);
-    if(index!==-1){
-      hotels[i].cart=true;
-    }
-    else{
-      hotels[i].cart=false;
-    }
-  }  
+  if (isLoading) {
+    return 'loading...'
   }
-}
-const favClicked=(hotel:Hotel)=>{
-  dispatch(toggleFavorite(hotel?._id))
-  const idfav:any=document.getElementById("fav");
-  document.location.reload()
-  // idfav.innerHTML=<FaRegHeart/>
-}
+
+  if (error) {
+    return error
+  }
+  let favHotels=hotels.filter((hotel:Hotel)=>hotel.isfav===true)
+  // console.log(favHotels);
   return (
     <div className="container">
-      {hotels?.map((hotel) => (
+      {favHotels?.map((hotel:any) => (
         <div className="card" key={hotel._id}>
-          <button id="fav" className="" onClick={()=>{favClicked(hotel)}}>
+          <button id="fav" className={css.btn} onClick={()=>{dispatch(toggleFavorite(hotel._id))}}>
             {hotel?.isfav&&<FaHeart/>}
             {!hotel?.isfav&&<FaRegHeart/>}
             </button> 
-          <button className="" onClick={()=>{dispatch(toggleCart(hotel?._id))}}>
+          <button className={css.btncart} onClick={()=>{dispatch(toggleCart(hotel?._id))}}>
             {!hotel?.cart&& <FaShoppingCart/>}
             {hotel?.cart&&<FaCartArrowDown/>}
           </button> 
@@ -80,4 +53,5 @@ const favClicked=(hotel:Hotel)=>{
     </div>
   );
 };
-export default Favorites
+
+export default Favorites;

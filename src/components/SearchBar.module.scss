@@ -1,0 +1,54 @@
+.title {
+    background: #0e2ecb;
+    color: #ffffff;
+    text-align: center;
+}
+
+.title h1 {
+    padding: 0px;
+    margin: 0px;
+}
+
+.input__wrapper {
+    margin: 20px;
+    text-align: center;
+}
+
+.input__wrapper input {
+    border: 3px solid #0e2ecb;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+.input__wrapper input:focus {
+    outline: none;
+}
+
+.input__wrapper button {
+    background-color: #0e2ecb;
+    color: white;
+    padding: 8px 15px;
+    font-size: 18px;
+    border: none;
+    border: 3px solid #0e2ecb;
+    border-radius: 5px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.body__item {
+    text-align: left !important;
+    border: 1px solid lightgray;
+    padding: 20px;
+    width: 500px;
+    margin: 20px auto;
+}
+
+.notFound {
+    width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid lightgray;
+    text-align: center;
+}

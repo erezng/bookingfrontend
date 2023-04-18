@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 
 const UpdateHotel = () => {
-  //Get hotel details from server
   const nav = useNavigate();
   const { _id } = useParams();
   const [name, setName] = useState("");
@@ -13,7 +12,7 @@ const UpdateHotel = () => {
   const [img, setImg] = useState("");
   const [showers, setShowers] = useState(1);
   const [isfav, setIsfav] = useState(1);
-  const [cart, setCart] = useState(1);
+  const [cart, setCart] = useState(0);
   const url = `http://localhost:3001/api/hotels/hotel/${_id}`;
   const getHotel = () => {
     fetch(url)
