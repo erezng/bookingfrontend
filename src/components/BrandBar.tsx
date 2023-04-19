@@ -9,6 +9,7 @@ import { FaHotel, FaFlagUsa } from "react-icons/fa";
 import { BiHelpCircle } from "react-icons/bi";
 import { BsCoin } from "react-icons/bs";
 import { HiOutlineBellAlert } from "react-icons/hi2";
+import UserFind from "./SearchBar";
 
 function clearLocalStorage() {
   localStorage.clear();
@@ -38,6 +39,7 @@ function BrandBar() {
                 Login
               </NavLink>
             )}
+            
           </Nav>
           <Nav>
             {isLoggedIn && (

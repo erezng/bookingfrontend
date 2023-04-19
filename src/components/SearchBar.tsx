@@ -5,7 +5,7 @@ import { AppDispatch } from '../app/store';
 import { Hotel } from '../@types';
 import css from "./SearchBar.module.scss"
 import { useNavigate } from 'react-router-dom';
-const UserFind: React.FC = () => {
+const HotelFind: React.FC = () => {
     const nav = useNavigate();
     const dispatch = useDispatch<AppDispatch>()
     const [hotelList, setHotelList] = React.useState<
@@ -33,10 +33,10 @@ const UserFind: React.FC = () => {
   };
   return (
     <div className="contaier">
+       <div className={css.input__wrapper}>
       <div className={css.title}>
-        Find your hotel!
-      </div>
-      <div className={css.input__wrapper}>
+        Find your hotel:
+      
         <input
           type="text"
           placeholder="Search Hotel"
@@ -48,6 +48,16 @@ const UserFind: React.FC = () => {
         <button disabled={!text} onClick={handleOnClick}>
           Search
         </button>
+        <button  
+          className=""
+          onClick={() => {
+          setText("")
+          setHotelList(undefined)
+          }}
+          >
+          X
+        </button>
+        
       <div className={css.body}>
         {hotelList && hotelList?.length === 0 && (
           <div className={css.notFound}>No Hotels Found</div>
@@ -74,9 +84,9 @@ const UserFind: React.FC = () => {
     </div>
     </div>
     </div>
-
+</div>
 
   );
 };
 
-export default UserFind;
+export default HotelFind;

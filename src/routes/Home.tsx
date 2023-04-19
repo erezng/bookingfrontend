@@ -42,6 +42,9 @@ const Home = () => {
             {hotel?.isfav&&<FaHeart/>}
             {!hotel?.isfav&&<FaRegHeart/>}
             </button> 
+            <button className={css.btncart} onClick={()=>{dispatch(toggleCart(hotel?._id))}}>
+            {hotel.cart===0? <FaShoppingCart/>:<FaCartArrowDown/>}
+          </button>
   
         <Card.Title>{hotel.name}</Card.Title>
         <Card.Text>
@@ -51,12 +54,11 @@ const Home = () => {
         <Button variant="primary"
             onClick={() => {
             nav(`/hotels/${hotel._id}`);
-            }}>Take a look</Button>
+            }}>Click here!</Button>
+            
             
       </Card.Body>
-          <button className={css.btncart} onClick={()=>{dispatch(toggleCart(hotel?._id))}}>
-            {hotel.cart===0? <FaShoppingCart/>:<FaCartArrowDown/>}
-          </button>
+
     </Card>
       ))}
 </div>
