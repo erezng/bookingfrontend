@@ -67,10 +67,8 @@ export default function FooterBar() {
         </section>
       </MDBContainer>
 
-
-      <section className=''>
-        <MDBContainer className='text-center text-md-start mt-5'>
-          <MDBRow className='mt-3'>
+        <MDBContainer className='text-center text-md-start'>
+          <MDBRow className='mt-1'>
             <MDBCol md="3" lg="4" xl="3" className='mx-auto mb-4'>
               <h6 className='text-uppercase fw-bold mb-4'>
                 <MDBIcon icon="gem" className="me-3" />
@@ -133,23 +131,20 @@ export default function FooterBar() {
               <h6 className='text-uppercase fw-bold mb-4'>Contact</h6>
               <p>
                 <MDBIcon icon="home" className="me-2" />
-                New York, NY 10012, US
+                Hadera
               </p>
               <p>
                 <MDBIcon icon="envelope" className="me-3" />
-                info@example.com
+                erez2g@gmail.com
               </p>
               <p>
-                <MDBIcon icon="phone" className="me-3" /> + 01 234 567 88
+                <MDBIcon icon="phone" className="me-3" /> 0528086321
               </p>
-              <p>
-                <MDBIcon icon="print" className="me-3" /> + 01 234 567 89
-              </p>
+
             </MDBCol>
           </MDBRow>
         </MDBContainer>
         
-      </section>
         <form action=''>
           <MDBRow className='d-flex justify-content-center'>
             <MDBCol size='auto' className='mb-4 mb-md-0'>
@@ -168,9 +163,9 @@ export default function FooterBar() {
           </MDBRow>
         </form>
       <div className='text-center p-4' style={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }}>
-        © 2021 Copyright:
+        © 2023 Copyright:
         <a className='text-reset fw-bold' href='https://mdbootstrap.com/'>
-          MDBootstrap.com
+          erez gabay
         </a>
       </div>
     </MDBFooter>

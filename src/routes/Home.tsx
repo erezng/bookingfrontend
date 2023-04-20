@@ -23,42 +23,37 @@ const Home = () => {
   if (isLoading) {
     return 'loading...'
   }
-
   if (error) {
     return error
   }
 
   return (
     <div className="container">
-      <h2>Where to next?
-          Find exclusive Genius rewards in every corner of the world!</h2>
+      <h2>Where to next? Find exclusive Genius rewards in every corner of the world!</h2>
       <div className="card-group">
       {hotels?.map((hotel:Hotel) => (
-        <Card key={hotel._id} style={{ width: '18rem' }}>
-
-      <Card.Img variant="top" src={hotel.img} />
+      <Card key={hotel._id}>
+      <Card.Img className="img-card" variant="top" src={hotel.img} />
       <Card.Body>
-          <button id="fav" className={css.btn} onClick={()=>{dispatch(toggleFavorite(hotel._id))}}>
-            {hotel?.isfav&&<FaHeart/>}
-            {!hotel?.isfav&&<FaRegHeart/>}
-            </button> 
-            <button className={css.btncart} onClick={()=>{dispatch(toggleCart(hotel?._id))}}>
-            {hotel.cart===0? <FaShoppingCart/>:<FaCartArrowDown/>}
-          </button>
+        <button id="fav" className={css.btn} onClick={()=>{dispatch(toggleFavorite(hotel._id))}}>
+          {hotel?.isfav&&<FaHeart/>}
+          {!hotel?.isfav&&<FaRegHeart/>}
+        </button> 
+          <button className={css.btncart} onClick={()=>{dispatch(toggleCart(hotel?._id))}}>
+          {hotel.cart===0? <FaShoppingCart/>:<FaCartArrowDown/>}
+        </button>
   
         <Card.Title>{hotel.name}</Card.Title>
         <Card.Text>
           {hotel.location}
-          
         </Card.Text>
         <Button variant="primary"
-            onClick={() => {
-            nav(`/hotels/${hotel._id}`);
-            }}>Click here!</Button>
-            
-            
+          onClick={() => {
+          nav(`/hotels/${hotel._id}`);
+          }}>
+          Click here!
+        </Button>
       </Card.Body>
-
     </Card>
       ))}
 </div>

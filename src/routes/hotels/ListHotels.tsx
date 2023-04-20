@@ -28,7 +28,7 @@ const ListHotels = () => {
   return (
     <div className="container">
       {hotels?.map((hotel:any) => (
-        <div className="card" key={hotel._id}>
+        <div className="card text-center" key={hotel._id}>
           <button id="fav" className={css.btn} onClick={()=>{dispatch(toggleFavorite(hotel._id))}}>
             {hotel?.isfav&&<FaHeart/>}
             {!hotel?.isfav&&<FaRegHeart/>}
@@ -42,7 +42,7 @@ const ListHotels = () => {
           <p>weekend:{hotel?.priceweekend}</p>
           <p><img className="w-100" src={hotel?.img} alt={hotel.name} /></p>
           <button         
-          className="btn btn-info"
+          className="btn btn-primary"
             onClick={() => {
               nav(`/hotels/${hotel._id}`);
             }}

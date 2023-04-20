@@ -59,7 +59,7 @@ const HotelDetails = () => {
         Delete
       </button>
       <button
-        className="btn btn-info"
+        className="btn btn-primary"
         onClick={()=>nav(-1)}
       >
         Go back

@@ -42,11 +42,9 @@ function BrandBar() {
             
           </Nav>
           <Nav>
-            {isLoggedIn && (
               <NavLink className={css.title} to="/about">
                 About
               </NavLink>
-            )}
             <NavLink className={css.title} to="/">
               <FaFlagUsa />
             </NavLink>
@@ -66,7 +64,8 @@ function BrandBar() {
               <button onClick={clearLocalStorage} className="btn btn-danger">
                 logout
               </button>
-            )}
+            )
+            }
           </Nav>
         </Navbar.Collapse>
       </Container>

@@ -18,12 +18,10 @@ import FooterBar from "./components/FooterBar";
 import Cart from "./features/Cart";
 import Favorites from "./features/Favorites";
 import UserFind from "./components/SearchBar";
-
+import NotFound from "./routes/NotFound";
 
 function App() {
   const { isLoggedIn } = useContext(AuthContext);
-  
-
 
   return (
     <>
@@ -32,18 +30,18 @@ function App() {
       <UserFind/>
       <Routes>
         <Route path="/hotels" element={<ListHotels />} />
+        <Route path="*" element={<NotFound />}/>
         <Route path="/flights" element={<ListFlights />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/" element={<Home />} />
         <Route path="/hotels/:_id" element={<HotelDetails />} />
-        {isLoggedIn && <Route path="/about" element={<About />} />}
+        <Route path="/about" element={<About />} />
         <Route path="/addproperty" element={<Addproperty />} />
         <Route path="/addflight" element={<AddFlight />} />
         <Route path="/edit/:_id" element={<UpdateHotel />} />
         {!isLoggedIn && <Route path="/login" element={<Login />} />}
-        {!isLoggedIn && <Route path="/register" element={<Register />} />}
-        
+        {!isLoggedIn && <Route path="/register" element={<Register />} />}  
       </Routes>
       <FooterBar/>
     </>
