@@ -37,9 +37,8 @@ const HotelDetails = () => {
       {details[0]?.isfav&& <FaHeart/>}
       {!details[0]?.isfav&&<FaRegHeart/>}
       </button> 
-      <button className={css.btncart} onClick={()=>{dispatch(toggleCart(details[0]._id))}}>
-      {!details[0]?.cart&& <FaShoppingCart/>}
-      {details[0]?.cart&&<FaCartArrowDown/>}
+      <button className={css.btncart} onClick={()=>{dispatch(toggleCart(details?._id))}}>
+        {details.cart===0? <FaShoppingCart/>:<FaCartArrowDown/>}
       </button> 
       <h1>{details[0]?.name}</h1>
       <p>location:{details[0]?.location}</p>

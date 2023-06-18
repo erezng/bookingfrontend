@@ -31,14 +31,13 @@ function App() {
       <Routes>
         <Route path="/hotels" element={<ListHotels />} />
         <Route path="*" element={<NotFound />}/>
-        <Route path="/flights" element={<ListFlights />} />
+        <Route path="/flights" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/" element={<Home />} />
         <Route path="/hotels/:_id" element={<HotelDetails />} />
         <Route path="/about" element={<About />} />
         <Route path="/addproperty" element={<Addproperty />} />
-        <Route path="/addflight" element={<AddFlight />} />
         <Route path="/edit/:_id" element={<UpdateHotel />} />
         {!isLoggedIn && <Route path="/login" element={<Login />} />}
         {!isLoggedIn && <Route path="/register" element={<Register />} />}  

@@ -39,9 +39,11 @@ function TopNavbar() {
               <FaTaxi /> Airport taxi
             </NavLink>
           </Nav>
+          {isLoggedIn && (
           <NavLink className={css.title} to="/addflight">
               List your flight
             </NavLink>
+          )}
             <NavLink className={css.title} to="/cart">
               <BsCart3 />
             </NavLink>            
